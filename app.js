@@ -78,6 +78,13 @@ app.post('/api/track', async (req, res) => {
     }
 });
 
+
+app.use('/', (req, res) => {
+    res.send(200).json({
+        message: 'Express Working'
+    })
+})
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
