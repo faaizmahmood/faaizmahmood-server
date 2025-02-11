@@ -8,7 +8,7 @@ const db = require('./db/db'); // Ensure the database connection is properly con
 const Track = require('./models/track');
 
 app.use(cors({
-    origin: ['http://127.0.0.1:5500/', 'https://brm-eight.vercel.app'],
+    origin: ['http://127.0.0.1:5500', 'https://brm-eight.vercel.app'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }))
@@ -52,7 +52,7 @@ async function updateVisitorCount() {
 
 app.post('/api/track', async (req, res) => {
     const data = req.body;
-    let clientIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    let clientIp = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
 
     // Fallback for local testing
     clientIp = clientIp === '::1' ? '8.8.8.8' : clientIp;
