@@ -7,7 +7,12 @@ const app = express();
 const db = require('./db/db'); // Ensure the database connection is properly configured
 const Track = require('./models/track');
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://brm-eight.vercel.app''],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}))
+
 app.use(express.json());
 
 // Logging middleware
